@@ -1,4 +1,19 @@
+const buttonToTop = document.querySelector('button')
 const menuItems = document.querySelectorAll('.intro-topics a');
+
+function revealButton() {
+  if(window.scrollY > 600) {
+    buttonToTop.style.display = 'block'
+  }
+  else {
+    buttonToTop.style.display = 'none'
+  }
+}
+window.addEventListener('scroll', revealButton)
+
+function goToTop() {
+  window.scrollTo({ top:0, behavior: 'smooth'})
+}
 
 menuItems.forEach(item => {
   item.addEventListener('click', scrollToIdOnClick);
@@ -16,10 +31,6 @@ function scrollToIdOnClick(event) {
 }
 
 function scrollToPosition(to) {
-  // window.scroll({
-  //   top: to,
-  //   behavior: "smooth",
-  // });
   smoothScrollTo(0, to, 700);
 }
 
@@ -39,7 +50,6 @@ function smoothScrollTo(endX, endY, duration) {
   
     duration = typeof duration !== 'undefined' ? duration : 400;
   
-    // Easing function
     const easeInOutQuart = (time, from, distance, duration) => {
       if ((time /= duration / 2) < 1) return distance / 2 * time * time * time * time + from;
       return -distance / 2 * ((time -= 2) * time * time * time - 2) + from;
